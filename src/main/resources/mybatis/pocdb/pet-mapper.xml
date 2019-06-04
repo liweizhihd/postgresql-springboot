@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定工作空间，要与接口名相同 -->
+<mapper namespace="com.example.postgresdemo.dao.pocdb.PetMapper">
+
+    <select id="getAll" resultType="com.example.postgresdemo.bean.PO.PetPO">
+        SELECT name,age,color FROM pet
+    </select>
+
+    <select id="getAllByCond" resultType="com.example.postgresdemo.bean.PO.PetPO">
+        SELECT name,age,color FROM pet
+        <where>
+            <if test="name != null and name != ''">
+                and name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addPets">
+        insert into pet (name,age,color) values
+        <foreach item='item' index='index' collection='list' open='(' separator='),(' close=')'>
+            #{item.name},#{item.age},#{item.color}
+        </foreach>
+    </insert>
+
+</mapper>

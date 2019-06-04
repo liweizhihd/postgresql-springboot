@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    pocdb:
+      url: jdbc:postgresql://10.0.1.33:5432/pocdb
+      username: yunzhihui
+      password: yunzhihui123
+      driverClassName: org.postgresql.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      useGlobalDataSourceStat: true
+      filters: stat,wall,logback
+      druid:
+        #初始化连接大小
+        initial-size: 8
+        #最小空闲连接数
+        min-idle: 5
+        #最大连接数
+        max-active: 10
+        #查询超时时间
+        query-timeout: 6000
+        #事务查询超时时间
+        transaction-query-timeout: 6000
+        #关闭空闲连接超时时间
+        remove-abandoned-timeout: 1800
+        filters: stat,config
